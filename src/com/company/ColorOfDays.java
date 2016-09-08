@@ -20,12 +20,10 @@ public class ColorOfDays {
         DayOfWeek getDayOfMonth = DayOfWeek.from(date.withDayOfMonth(numberOfDay));
         if (isCurrentDay(numberOfDay, date)) {
             return colorForCurrentDay + numberOfDay;
+        } else if (isWeekend(getDayOfMonth)) {
+            return colorForWeekend + numberOfDay;
         } else {
-            if (isWeekend(getDayOfMonth)) {
-                return colorForWeekend + numberOfDay;
-            } else {
-                return colorForWorkDays + numberOfDay;
-            }
+            return colorForWorkDays + numberOfDay;
         }
     }
 }
