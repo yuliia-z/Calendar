@@ -8,6 +8,7 @@ import java.util.Locale;
 public class Calendar {
     public static LocalDate date;
     public static int[] dayOfMonth = new int[32];
+    public static ColorOfDays ColorForDay = new ColorOfDays();
 
     public void Calendar(LocalDate date) {
         this.date = date;
@@ -29,36 +30,6 @@ public class Calendar {
         }
     }
 
-    private static String colorForToday(int numberOfDay) {
-        return ColorOfDays.getColorForCurrentDay() + numberOfDay;
-    }
-
-    private static String colorForWeekend(int numberOfDay) {
-        return ColorOfDays.getColorForWeekend() + numberOfDay;
-    }
-
-    private static String colorForWorkDays(int numberOfDay) {
-        return ColorOfDays.getColorForWorkDays() + numberOfDay;
-    }
-
-    private static boolean isWeekend(DayOfWeek getDayOfMonth) {
-        return (getDayOfMonth == DayOfWeek.SATURDAY || getDayOfMonth == DayOfWeek.SUNDAY);
-
-    }
-
-    private static String colorForDayInWeek(int numberOfDay) {
-        DayOfWeek getDayOfMonth = DayOfWeek.from(date.withDayOfMonth(numberOfDay));
-        if (date.getDayOfMonth() == numberOfDay) {
-            return colorForToday(numberOfDay);
-        } else {
-            if (isWeekend(getDayOfMonth)) {
-                return colorForWeekend(numberOfDay);
-            } else {
-                return colorForWorkDays(numberOfDay);
-            }
-        }
-    }
-
     private static boolean isLastDayOfWeek(int getDayOfMonth, int firstDay) {
         return ((getDayOfMonth + firstDay) % 7 == 0);
     }
@@ -71,7 +42,7 @@ public class Calendar {
             System.out.print("\t");
         }
         for (int i = 0; i <= dayOfMonth[i]; i++) {
-            System.out.print(colorForDayInWeek(dayOfMonth[i]) + "\t");
+            System.out.print(ColorForDay.colorForDayInWeek(dayOfMonth[i], date) + "\t");
             if (isLastDayOfWeek(dayOfMonth[i], firstDay)) {
                 System.out.println();
             }
