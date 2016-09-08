@@ -12,9 +12,13 @@ public class ColorOfDays {
         return (getDayOfMonth == DayOfWeek.SATURDAY || getDayOfMonth == DayOfWeek.SUNDAY);
     }
 
+    private static boolean isCurrentDay(int numberOfDay, LocalDate date) {
+        return date.getDayOfMonth() == numberOfDay;
+    }
+
     public static String colorForDayInWeek(int numberOfDay, LocalDate date) {
         DayOfWeek getDayOfMonth = DayOfWeek.from(date.withDayOfMonth(numberOfDay));
-        if (date.getDayOfMonth() == numberOfDay) {
+        if (isCurrentDay(numberOfDay, date)) {
             return colorForCurrentDay + numberOfDay;
         } else {
             if (isWeekend(getDayOfMonth)) {
